@@ -7,7 +7,6 @@ using namespace std;
 #include "threadpool.h"
 
 /*
-如何能让线程池提交任务更方便
 submitTask：可变参模板
 
 C++11 线程库 thread  package_task(function函数对象)  async
@@ -45,7 +44,6 @@ int main()
     
     }, 1, 100);
     future<int> r4 = pool.submitTask(sum2, 1, 2, 3);
-
 
     future<int> r5 = pool.submitTask([](int a, int b)->int{
         int res = 0;

@@ -121,7 +121,7 @@ public:
     // 给线程池添加任务
     // 使用可变参模板编程，让submitTask可以接收任意任务函数和任意数量参数
     // pool.submitTask(sum1, 10, 20);  右值引用+引用折叠
-    // 返回值future<> decltype意思是从函数参数中推导出返回值类型
+    // 返回值future<> decltype 从函数参数中推导出返回值类型
     template<typename Func, typename... Args>
     auto submitTask(Func&& func, Args&&... args) -> std::future<decltype(func(args...))>
     {
@@ -207,11 +207,7 @@ public:
             pair.second->start();
             idleThreadSize_++;
         }
-        // for(int i = 0;i < initThreadsSize_ ; i++)
-        // {
-        //     threads_[i]->start(); // 需要去执行一个线程函数
-        //     idleThreadSize_++; // 记录初始空闲线程的数量
-        // }
+
     }
 
     ThreadPool(const ThreadPool&) = delete;
@@ -245,7 +241,7 @@ private:
                     {
                         threads_.erase(threadid);
                         std::cout << "threadid:" << std::this_thread::get_id() << " exit!" << std::endl;
-                        exitCond_.notify_all(); // 通知线程池析构函数可以结束了
+                        exitCond_.notify_all(); // 通知线程池析构函数结束
                         return ;  // 线程函数结束，线程结束
                     }
                     if(poolMode_ == PoolMode::MODE_CACHED)
@@ -279,11 +275,11 @@ private:
                     
                 }
                 
-                idleThreadSize_--; // 线程要开始工作了，空闲线程数-1
+                idleThreadSize_--; // 线程开始工作，空闲线程数-1
 
                 std::cout << "tid:" << std::this_thread::get_id() << 
                     " 获取任务成功..." << std::endl;
-                // 从任务队列中取一个任务出来
+                // 从任务队列中取一个任务
                 task = taskQue_.front();
                 taskQue_.pop();
                 if(taskSize_ > 0) taskSize_--;
