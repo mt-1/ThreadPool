@@ -47,7 +47,7 @@ public:
     template<typename T>
     T cast()
     {
-        // 怎么从base_找到它所指向的派生类对象，并且从它里面取出data成员变量
+        // 从base_找到它所指向的派生类对象，并且从它里面取出data成员变量
         // 基类指针 =》 派生类指针  RTTI
         Derive<T>* pd = dynamic_cast<Derive<T>*>(base_.get());
         if(pd == nullptr)
@@ -139,10 +139,10 @@ public:
     // Result(const Result&) = delete;
     // Result& operator=(const Result&) = delete;
 
-    // setVal方法，获取任务执行完成的返回值
+    // 获取任务执行完成的返回值
     void setVal(Any any);
 
-    // get方法，用户调用这个方法获取task的返回值 阻塞直到得到结果
+    // 用户调用这个方法获取task的返回值 阻塞直到得到结果
     Any get();
 private:
     Any any_;  // 存储任务的返回值

@@ -197,11 +197,11 @@ void ThreadPool::threadFunc(int threadid)
                 
             }
             
-            idleThreadSize_--; // 线程要开始工作了，空闲线程数-1
+            idleThreadSize_--; // 线程开始工作，空闲线程数-1
 
             std::cout << "tid:" << std::this_thread::get_id() << 
                 " 获取任务成功..." << std::endl;
-            // 从任务队列中取一个任务出来
+            // 从任务队列中取一个任务
             task = taskQue_.front();
             taskQue_.pop();
             taskSize_--;
@@ -242,7 +242,7 @@ void Task::exec()
 {
     if(result_ != nullptr)
     {
-        result_->setVal(run()); // 这里发生多态调用，执行用户自定义的任务逻辑
+        result_->setVal(run()); // 发生多态调用，执行用户自定义的任务逻辑
     }
 }
 
